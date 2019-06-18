@@ -8,8 +8,8 @@ var options = {
   title: "WIKI API",
   version: "1.0.0",
   description: "API to maintain WIKI type articles",
-  host: "localhost",
-  basePath: "/api",
+  host: "localhost:3000",
+  basePath: "/",
   schemes: ["http", "https"],
   consumes: ["application/json"],
   produces: ["application/json"],
@@ -45,7 +45,7 @@ swagger.initialise(app, options);
 
 //redirect / to api-docs
 app.get("/", (req, reply) => {
-  reply.status(200).redirect("/api/api-docs");
+  reply.status(200).redirect("/api-docs");
 });
 
 //Run server

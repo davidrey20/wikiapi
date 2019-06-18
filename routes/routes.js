@@ -29,6 +29,24 @@ router.get(pathOne, articleController.getArticles).describe({
 });
 
 router.post(pathOne, articleController.addArticle).describe({
+  parameters: [
+    {
+      description: "Article Payload",
+      in: "body",
+      name: "body",
+      schema: {
+        type: "object",
+        properties: {
+          title: {
+            type: "string"
+          },
+          content: {
+            type: "string"
+          }
+        }
+      }
+    }
+  ],
   responses: {
     200: {
       description: "Adds Articles"
@@ -55,6 +73,24 @@ router.get(pathTwo, articleController.getSingleArticle).describe({
 });
 
 router.put(pathTwo, articleController.replaceSingleArticle).describe({
+  parameters: [
+    {
+      description: "Article Payload",
+      in: "body",
+      name: "body",
+      schema: {
+        type: "object",
+        properties: {
+          title: {
+            type: "string"
+          },
+          content: {
+            type: "string"
+          }
+        }
+      }
+    }
+  ],
   responses: {
     200: {
       description: "Replaces single article"
@@ -63,6 +99,21 @@ router.put(pathTwo, articleController.replaceSingleArticle).describe({
 });
 
 router.patch(pathTwo, articleController.patchSingleArticle).describe({
+  parameters: [
+    {
+      description: "Article Payload",
+      in: "body",
+      name: "body",
+      schema: {
+        type: "object",
+        properties: {
+          content: {
+            type: "string"
+          }
+        }
+      }
+    }
+  ],
   responses: {
     200: {
       description: "Patches single article"
@@ -80,17 +131,9 @@ router.delete(pathTwo, articleController.deleteSingleArticle).describe({
 
 //Route for swagger json
 
-router
-  .get("/swagger.json", function(err, res) {
-    res.status(200).json(swagger.json());
-  })
-  .describe({
-    responses: {
-      200: {
-        description: "Returns the swagger.json document"
-      }
-    }
-  });
+router.get("/swagger.json", function(err, res) {
+  res.status(200).json(swagger.json());
+});
 
 router.use("/api-docs", swaggerUi.serve);
 router.get("/api-docs", swaggerUi.setup(null, options));
